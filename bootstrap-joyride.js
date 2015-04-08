@@ -101,8 +101,11 @@
           // Make target encapsulated to original context
           $target = $(target, joyrideContext).first();
           if (!$target.length) {
-            log("no target found: " + target);
-            return;
+            $target = $(target).first();
+            if (!$target.length) {
+              log("no target found: " + target);
+              return;
+            }
           }
           $target.popover({
             html : true,
