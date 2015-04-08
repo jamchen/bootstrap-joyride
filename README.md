@@ -141,6 +141,8 @@ Please feel free to contribute.
 ## Credits
 Orignial Idea and code is from:
 Bootstrap-Tour by [GILD](http://www.gild.com).
+and [Phantazm](https://github.com/Phantazm/bootstrap-joyride)
+
 Since no active dev i decided to fix the bugs and improve and rebrand it.
 
 ## MIT Open Source License
