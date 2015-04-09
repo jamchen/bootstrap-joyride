@@ -143,7 +143,7 @@
             current_step = $(this).data('touridx');
             $(settings.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement').popover('hide');
             if (settings.nextOnClose) {
-              return setCookieStep(current_step + 1);
+              setCookieStep(current_step + 1);
             }
             return settings.postRideCallback(joyrideContext);
           });
