@@ -34,6 +34,7 @@
         cookieMonster: false,
         cookieName: 'bootstrapJoyride',
         cookieDomain: false,
+        preRideCallback: $.noop,
         postRideCallback: $.noop,
         postStepCallback: $.noop,
         nextOnClose: false,
@@ -122,6 +123,9 @@
           
           $li.data('targetElement', $target);
           if (idx === (first_step - 1)) {
+            if (settings.preRideCallback !== $.noop) {
+              settings.preRideCallback(joyrideContext);
+            }
             $target.popover('show');
             var targetOffset = $tip.offset().top - ($(window).height() / 2 - $tip.height() / 2);
             $('html, body').animate({scrollTop: targetOffset}, 500);
