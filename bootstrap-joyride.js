@@ -146,7 +146,10 @@
             
             var current_step;
             current_step = $(this).data('touridx');
-            $(settings.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement').popover('hide');
+            var current_target = $(settings.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
+            if (current_target) {
+              current_target.popover('hide');              
+            }
             if (settings.nextOnClose) {
               setCookieStep(current_step + 1);
             }
@@ -160,7 +163,10 @@
             var current_step, next_tip, _ref, id;
             current_step = $(this).data('touridx');
             log("current step: " + current_step);
-            $(settings.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement').popover('hide');
+            var current_target = $(settings.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
+            if (current_target) {
+              current_target.popover('hide');              
+            }
             if (settings.postStepCallback !== $.noop) {
               settings.postStepCallback($(this).data('touridx'));
             }
