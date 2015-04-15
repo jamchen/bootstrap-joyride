@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   var $, cookie;
 
   $ = jQuery;
@@ -74,7 +76,7 @@
         var joyrideContext = this; 
         var $tips, first_step;
         var $tipContents = $();
-        $tipContent = $(settings.tipContent).first();
+        var $tipContent = $(settings.tipContent).first();
         if ($tipContent == null) {
           log("can't find tipContent from selector: " + settings.tipContent);
         }
@@ -170,11 +172,11 @@
             if (settings.postStepCallback !== $.noop) {
               settings.postStepCallback($(this).data('touridx'));
             }
-            $next_tip = (_ref = $(settings.tipContent).first().find("li:nth-child(" + (current_step + 1) + ")")) != null ? _ref.data('targetElement') : void 0;
+            next_tip = (_ref = $(settings.tipContent).first().find("li:nth-child(" + (current_step + 1) + ")")) != null ? _ref.data('targetElement') : void 0;
             
             setCookieStep(current_step + 1);
-            if ($next_tip != null) {
-              $next_tip.popover('show');
+            if (next_tip != null) {
+              next_tip.popover('show');
               var $popover = $next_tip.data("bs.popover").$tip;
               var targetOffset = $popover.offset().top - ($(window).height() / 2 - $popover.height() / 2);
               $('html, body').animate({scrollTop: targetOffset}, 500);
