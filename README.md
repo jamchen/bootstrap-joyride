@@ -53,7 +53,7 @@ Please feel free to contribute.
 
 	<script type="text/javascript">
 	  $(window).load(function() {
-	    $(this).Joyride({
+	    $(this).bootJoyride({
 	      /* Settings will go here */
 	    });
 	  });
@@ -66,7 +66,7 @@ Please feel free to contribute.
 
 	$('#startride').click(function (e) {
     e.preventDefault();
-	    $(this).BootJoyride({
+	    $(this).bootJoyride({
 	      'cookieMonster': false,           	// true/false for whether cookies are used
 	      'cookieName': 'myHomepageJoyride',  	// choose your own cookie name
 	      'cookieDomain': false,           		// set to false or yoursite.com
@@ -104,7 +104,7 @@ Please feel free to contribute.
 	$('#startride').click(function (e) {
     	e.preventDefault();
 	    $('#overlay').show();
-		    $(this).BootJoyride({
+		    $(this).bootJoyride({
 		      'cookieMonster': false,           	// true/false for whether cookies are used
 		      'cookieName': 'myHomepageJoyride',  	// choose your own cookie name
 		      'cookieDomain': false,           		// set to false or yoursite.com
@@ -121,12 +121,17 @@ Please feel free to contribute.
     	$('#overlay').hide();
     }
 
-	
+### Methods
+#### .bootJoyride('stop')
+To stop Joyride at anytime. Similar to the close button on popover.
+
+	$(this).bootJoyride('stop')
+
 ### Options / Settings
 
 	- Set your settings to override the defaults
 
-	$(this).BootJoyride({
+	$(this).bootJoyride({
 	  'cookieMonster': true,           		// true/false for whether cookies are used
 	  'cookieName': 'myHomepageJoyride',  	// choose your own cookie name
 	  'cookieDomain': false,           		// set to false or yoursite.com
