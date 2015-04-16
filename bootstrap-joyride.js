@@ -28,6 +28,8 @@
     return ((result = new RegExp("(?:^|; )" + encodeURIComponent(key) + "=([^;]*)").exec(document.cookie)) ? decode(result[1]) : null);
   };
   var BootJoyride = function (element, options) {
+    this.$current_target =
+    this.$current_popover =
     this.$element =
     this.current_step =
     this.options = null
@@ -118,6 +120,8 @@
           self.options.preRideCallback(self.$element);
         }
         self.current_step = idx + 1;
+        self.$current_target = $target;
+        self.$current_popover = self.$current_target.data("bs.popover");
         $target.popover('show');
         var targetOffset = $tip.offset().top - ($(window).height() / 2 - $tip.height() / 2);
         $('html, body').animate({scrollTop: targetOffset}, 500);
@@ -143,9 +147,13 @@
     var current_step, next_tip, _ref, id;
     current_step = this.current_step;
     this.log("current step: " + current_step);
-    var current_target = $(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
+    var current_target = this.$current_target;//$(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
     if (current_target) {
-      current_target.popover('hide');              
+      if (current_target.data('bs.popover')) {
+        current_target.popover('hide');              
+      } else if (this.$current_popover) {
+        this.$current_popover.hide();
+      }
     }
     if (this.options.postStepCallback !== $.noop) {
       this.options.postStepCallback(current_step);
@@ -155,6 +163,8 @@
     this.setCookieStep(current_step + 1);
     this.current_step = this.current_step + 1;
     if (next_tip != null) {
+      this.$current_target = next_tip;
+      this.$current_popover = this.$current_target.data("bs.popover");
       next_tip.popover('show');
       var $popover = next_tip.data("bs.popover").$tip;
       if ($popover) {
@@ -171,9 +181,11 @@
   BootJoyride.prototype.stop = function() {
     var current_step;
     current_step = this.current_step;
-    var current_target = $(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
-    if (current_target) {
+    var current_target = this.$current_target;//$(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
+    if (current_target.data('bs.popover')) {
       current_target.popover('hide');              
+    } else if (this.$current_popover) {
+      this.$current_popover.hide();
     }
     if (this.options.nextOnClose) {
       this.setCookieStep(current_step + 1);
