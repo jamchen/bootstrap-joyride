@@ -46,7 +46,8 @@
     postRideCallback: $.noop,
     postStepCallback: $.noop,
     nextOnClose: false,
-    debug: false
+    debug: false,
+    additionalPopoverClass: null
   };
   BootJoyride.prototype.init = function(element, options) {
     this.options = $.extend({}, this.getDefaults(), options);
@@ -105,7 +106,12 @@
       $target.popover("tip");
       var $tip = $target.data("bs.popover").$tip
       $tipContents.push($tip);
-      
+      if (tip_data['class']) {
+        $tip.addClass(tip_data['class']);
+      }
+      if (self.options.additionalPopoverClass) {
+        $tip.addClass(self.options.additionalPopoverClass);
+      }
       $li.data('targetElement', $target);
       if (idx === (first_step - 1)) {
         if (self.options.preRideCallback !== $.noop) {
