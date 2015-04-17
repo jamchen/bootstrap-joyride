@@ -127,6 +127,11 @@ To stop Joyride at anytime. Similar to the close button on popover.
 
 	$(this).bootJoyride('stop')
 
+#### .bootJoyride('restart')
+To restart Joyride from current step at anytime.
+
+	$(this).bootJoyride('restart')
+
 ### Options / Settings
 
 	- Set your settings to override the defaults
