@@ -137,7 +137,7 @@
   BootJoyride.prototype.onClose = function(e) {
     e.preventDefault();
     e.stopPropagation();
-    return this.stop(this.options.nextOnClose);
+    return this._stop(this.options.nextOnClose);
   }
   BootJoyride.prototype.onNext = function(e) {
     e.preventDefault();
@@ -177,7 +177,7 @@
       }
     }
   }
-  BootJoyride.prototype.stop = function(nextOnClose) {
+  BootJoyride.prototype._stop = function(nextOnClose) {
     var current_step;
     current_step = this.current_step;
     var current_target = this.$current_target;//$(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
@@ -187,13 +187,18 @@
       this.$current_popover.hide();
     }
     if (nextOnClose) {
+      this.log("skip current step next time.");
       this.setCookieStep(current_step + 1);
     }
     return this.options.postRideCallback(this.$element);
   }
   var DO_NOT_SKIP_TO_NEXT = false;
+  var SKIP_TO_NEXT = true;
+  BootJoyride.prototype.stop = function() {
+    this._stop(SKIP_TO_NEXT);
+  }
   BootJoyride.prototype.restart = function() {
-    this.stop(DO_NOT_SKIP_TO_NEXT);
+    this._stop(DO_NOT_SKIP_TO_NEXT);
     this.init(this.$element, this.options);
   }
   BootJoyride.prototype.getDefaults = function() {
