@@ -101,7 +101,7 @@
         content: "<p>" + ($li.html()) + "</p><p style=\"text-align: right\"><a href=\"#\" class=\"tour-tip-next btn\" data-touridx=\"" + (idx + 1) + "\">" + ((idx + 1) < $tips.length ? 'Next <i class="icon-chevron-right"></i>' : '<i class="icon-ok"></i> Done') + "</a></p>",
         placement: tip_data['placement'] || 'right',
         container: tip_data['container'] ? $(tip_data['container']) : false,
-        viewport: tip_data['viewport'] ? $(tip_data['viewport']) : "{ selector: 'body', padding: 0 }"
+        viewport: tip_data['viewport'] ? $(tip_data['viewport']) : { selector: 'body', padding: 0 }
       });
       
       $target.popover("tip");
