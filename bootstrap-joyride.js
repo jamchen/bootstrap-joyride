@@ -116,6 +116,7 @@
       $li.data('targetElement', $target);
       if (idx === (first_step - 1)) {
         if (!$target.is(':visible')) {
+          this.log("first_step is invisible, skip it.");      
           first_step++;
           return $target;
         }
@@ -147,7 +148,9 @@
   BootJoyride.prototype.onNext = function(e) {
     e.preventDefault();
     e.stopPropagation();
-
+    this._onNext();
+  }
+  BootJoyride.prototype._onNext = function() {
     var current_step, next_tip, _ref, id;
     current_step = this.current_step;
     this.log("current step: " + current_step);
@@ -167,6 +170,10 @@
     this.setCookieStep(current_step + 1);
     this.current_step = this.current_step + 1;
     if (next_tip != null) {
+      if (!next_tip.is(':visible')) {
+        this.log("next_tip is invisible, skip it.");      
+        return this._onNext();
+      }
       this.$current_target = next_tip;
       this.$current_popover = this.$current_target.data("bs.popover");
       next_tip.popover('show');
@@ -177,6 +184,7 @@
       }
       return next_tip;
     } else {
+      this.log("No next step. End tour.");      
       if (this.options.postRideCallback !== $.noop) {
         return this.options.postRideCallback(this.$element);
       }
