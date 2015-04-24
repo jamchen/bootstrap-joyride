@@ -115,6 +115,11 @@
       }
       $li.data('targetElement', $target);
       if (idx === (first_step - 1)) {
+        if (!$target.is(':visible')) {
+          first_step++;
+          return $target;
+        }
+
         if (self.options.preRideCallback !== $.noop) {
           self.options.preRideCallback(self.$element);
         }
