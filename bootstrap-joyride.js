@@ -193,7 +193,11 @@
   BootJoyride.prototype._stop = function(nextOnClose) {
     var current_step;
     current_step = this.current_step;
-    var current_target = this.$current_target;//$(this.options.tipContent).first().find("li:nth-child(" + current_step + ")").data('targetElement');
+    var current_target = this.$current_target;
+    if (!current_target) {
+      return;
+    }
+
     if (current_target && current_target.data('bs.popover')) {
       current_target.popover('hide');              
     } else if (this.$current_popover) {
@@ -203,6 +207,7 @@
       this.log("skip current step next time.");
       this.setCookieStep(current_step + 1);
     }
+    this.$current_target = null;
     return this.options.postRideCallback(this.$element);
   }
   var DO_NOT_SKIP_TO_NEXT = false;
@@ -239,6 +244,7 @@
   }
   BootJoyride.prototype.setCookieStep = function(step) {
     if (this.options.cookieMonster) {
+      this.log("Save cookie: "+this.options.cookieName+"="+step);
       return cookie(this.options.cookieName, "" + step, {
         expires: 365,
         domain: this.options.cookieDomain
