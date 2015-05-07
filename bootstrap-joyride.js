@@ -96,7 +96,7 @@
       }
       $target.popover({
         html : true,
-        trigger: 'manual|focus',
+        trigger: 'manual',
         title: tip_data['title'] ? titleIcon + tip_data['title'] + "  <a class=\"tour-tip-close close\" data-touridx=\"" + (idx + 1) + "\">&times;</a>" : null,
         content: "<p>" + ($li.html()) + "</p><p style=\"text-align: right\"><a href=\"#\" class=\"tour-tip-next btn\" data-touridx=\"" + (idx + 1) + "\">" + ((idx + 1) < $tips.length ? 'Next <i class="icon-chevron-right"></i>' : '<i class="icon-ok"></i> Done') + "</a></p>",
         placement: tip_data['placement'] || 'right',
