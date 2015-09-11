@@ -116,7 +116,7 @@
       $li.data('targetElement', $target);
       if (idx === (first_step - 1)) {
         if (!$target.is(':visible')) {
-          this.log("first_step is invisible, skip it.");      
+          self.log("first_step is invisible, skip it.");      
           first_step++;
           return $target;
         }
